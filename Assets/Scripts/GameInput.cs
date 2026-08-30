@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {
     
     public static GameInput Instance { get; private set; }
+
+    public event EventHandler OnMenuButtonPressed; //chưa rõ về các setup esc event menu_performed và event OnmenuButtonpress
     
     private InputActions inputActions;
 
@@ -13,6 +17,13 @@ public class GameInput : MonoBehaviour
         Instance = this;
         inputActions = new InputActions();
         inputActions.Enable();
+
+        inputActions.Player.Menu.performed += Menu_performed;
+    }
+
+    private void Menu_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnMenuButtonPressed?.Invoke(this, EventArgs.Empty);
     }
 
     private void OnDestroy()

@@ -26,6 +26,7 @@ public class LandedUI : MonoBehaviour
     {
         Lander.Instance.OnLanded += Lander_OnLanded;
 
+        nextButton.Select(); // day la gi ??/
         Hide();
     }
 
